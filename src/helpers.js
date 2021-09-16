@@ -1,7 +1,8 @@
 import DirectoryItem from './components/DirectoryItem';
 
 export const getDirectoryList = (directoryItems) => {
-    return directoryItems.map((itemToRender) => <DirectoryItem key={itemToRender.name} item={itemToRender} />);
+    return directoryItems.map((itemToRender, index) => 
+        <DirectoryItem key={index+itemToRender.name} item={itemToRender} />);
 };
 
 
