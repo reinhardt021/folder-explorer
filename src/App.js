@@ -71,6 +71,26 @@ function App() {
     return directoryStats;
   };
 
+  const getDirectoryList = (directoryItems) => {
+      console.log('>>> getDirectoryList directoryItems', directoryItems);
+
+      <DirectoryItem item={{
+                            type: "file",
+                            name: "Bikedfafsf.pdf",
+                            size: 91234,
+                            isOpen: false,
+                        }} />
+
+      return directoryItems.map((directoryItem) => {
+          const itemToRender = {
+              ...directoryItem,
+              isOpen: false,
+          };
+
+          return <DirectoryItem item={itemToRender} />;
+      });
+  };
+
   return (
     <div className="App">
       <Box 
@@ -98,59 +118,62 @@ function App() {
             </Box>
             <Box bgColor="gray.50" padding="40px">
                 <Container align="left">
-                    <VStack paddingBottom="30px" align="left" spacing={6}>
-                        <DirectoryItem item={{
-                            type: "file",
-                            name: "Bikedfafsf.pdf",
-                            size: 91234,
-                            isOpen: false,
-                        }} />
-                        <DirectoryItem item={{
-                            type: "folder",
-                            name: "Bikes",
-                            size: 23654,
-                            isOpen: false,
-                        }} />
-                        <DirectoryItem item={{
-                            type: "folder",
-                            name: "Planes",
-                            size: 23654,
-                            isOpen: false,
-                        }} />
-                        <DirectoryItem item={{
-                            type: "folder",
-                            name: "Cars",
-                            size: 23654,
-                            isOpen: true,
-                        }} />
-                        <Box>
-                            <VStack align="left">
-                                <Box>
-                                    <HStack>
-                                        <Box width="2em" height="1em">
-                                        </Box>
-                                        <Box>
-                                            <VStack align="left" spacing={6}>
-                                                <DirectoryItem item={{
-                                                    type: "file",
-                                                    name: "Toyota",
-                                                    size: 15654,
-                                                    isOpen: true,
-                                                }} />
-                                                <DirectoryItem item={{
-                                                    type: "folder",
-                                                    name: "Mitsubishi",
-                                                    size: 15654,
-                                                    isOpen: false,
-                                                }} />
-                                            </VStack>
-                                        </Box>
-                                    </HStack>
-                                </Box>
-                            </VStack>
+                    <Box paddingBottom="30px">
+                        <VStack align="left" spacing={6}>
+                            {getDirectoryList(directoryItems)}
+                            <DirectoryItem item={{
+                                type: "file",
+                                name: "Bikedfafsf.pdf",
+                                size: 91234,
+                                isOpen: false,
+                            }} />
+                            <DirectoryItem item={{
+                                type: "folder",
+                                name: "Bikes",
+                                size: 23654,
+                                isOpen: false,
+                            }} />
+                            <DirectoryItem item={{
+                                type: "folder",
+                                name: "Planes",
+                                size: 23654,
+                                isOpen: false,
+                            }} />
+                            <DirectoryItem item={{
+                                type: "folder",
+                                name: "Cars",
+                                size: 23654,
+                                isOpen: true,
+                            }} />
+                            <Box>
+                                <VStack align="left">
+                                    <Box>
+                                        <HStack>
+                                            <Box width="2em" height="1em">
+                                            </Box>
+                                            <Box>
+                                                <VStack align="left" spacing={6}>
+                                                    <DirectoryItem item={{
+                                                        type: "file",
+                                                        name: "Toyota",
+                                                        size: 15654,
+                                                        isOpen: true,
+                                                    }} />
+                                                    <DirectoryItem item={{
+                                                        type: "folder",
+                                                        name: "Mitsubishi",
+                                                        size: 15654,
+                                                        isOpen: false,
+                                                    }} />
+                                                </VStack>
+                                            </Box>
+                                        </HStack>
+                                    </Box>
+                                </VStack>
 
-                        </Box>
-                    </VStack>
+                            </Box>
+                        </VStack>
+                    </Box>
                     <Box borderTop="1px" borderColor="gray.400" paddingTop="20px">
                         <Text fontSize="xl">Total Files: { directoryData.fileCount }</Text>
                         <Text fontSize="xl">
