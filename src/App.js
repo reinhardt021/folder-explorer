@@ -5,7 +5,13 @@ import {
     Container,
     HStack,
     Text
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
+import { 
+    FaChevronDown,
+    FaChevronRight,
+    FaFolder,
+    FaFolderOpen,
+} from "react-icons/fa";
 
 function App() {
   return (
@@ -24,29 +30,45 @@ function App() {
           boxShadow="base"
           rounded="lg"
         >
-            <Box bgColor="gray.400" align="left" padding="5px" paddingLeft="10px">
-                <HStack>
-                    <Circle size="15px" bgColor="gray.500"></Circle>
-                    <Circle size="15px" bgColor="gray.500"></Circle>
-                    <Circle size="15px" bgColor="gray.500"></Circle>
+            <Box 
+                bgColor="gray.400" 
+                align="left" 
+                padding="7px" 
+            >
+                <HStack spacing="3px">
+                    <Circle size="10px" bgColor="gray.500"></Circle>
+                    <Circle size="10px" bgColor="gray.500"></Circle>
+                    <Circle size="10px" bgColor="gray.500"></Circle>
                 </HStack>
             </Box>
             <Box bgColor="gray.50" padding="40px">
                 <Container align="left">
                     <Box paddingBottom="30px">
-                        <Container>
-                            Bikes
-                        </Container>
-                        <Container>
-                            Planes
-                        </Container>
-                        <Container>
-                            Cars
-                        </Container>
+                        <Box>
+                            <HStack>
+                                <FaChevronRight/>
+                                <FaFolder/>
+                                <Text>Bikes</Text>
+                            </HStack>
+                        </Box>
+                        <Box>
+                            <HStack>
+                                <FaChevronRight/>
+                                <FaFolder/>
+                                <Text>Planes</Text>
+                            </HStack>
+                        </Box>
+                        <Box>
+                            <HStack>
+                                <FaChevronDown/>
+                                <FaFolderOpen/>
+                                <Text>Cars</Text>
+                            </HStack>
+                        </Box>
                     </Box>
                     <Box borderTop="1px" borderColor="gray.400" paddingTop="20px">
-                        <p>Total Files: 5</p>
-                        <p>Total Filesize: 921MB</p>
+                        <Text fontSize="xl">Total Files: 5</Text>
+                        <Text fontSize="xl">Total Filesize: 921MB</Text>
                     </Box>
                 </Container>
             </Box>
