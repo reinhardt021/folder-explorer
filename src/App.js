@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { 
     Box,
@@ -23,6 +23,11 @@ const directoryURL = "https://dev21.becollective.com/api/v2/coding-challenges/di
 const TYPE_FILE = 'file';
 const TYPE_FOLDER = 'folder';
 
+const windowActions = ['close', 'minimize', 'maximize'];
+const windowActionItems = windowActions.map((windowAction, index) => {
+  return <Circle key={index} size="10px" bgColor="gray.500"></Circle>;
+});
+
 function App() {
   const [ directoryItems, setDirectoryItems ] = useState([]);
   const [ directoryData, setDirectoryData ] = useState({
@@ -36,11 +41,12 @@ function App() {
   }, []);
 
   useEffect(() => {
+      console.log('>>> directoryItems', directoryItems);
       const finalStats = getDirectoryStats(directoryItems);
       setDirectoryData(finalStats);
   }, [directoryItems]);
 
-  const getItemData = (directoryStats, item) => {
+  const getItemStats = (directoryStats, item) => {
     if (item.type === TYPE_FILE) {
       directoryStats.fileCount += 1;
       directoryStats.totalSizeOfFiles += item.size;
@@ -59,7 +65,7 @@ function App() {
       fileCount: 0,
       totalSizeOfFiles: 0,
     };  
-    const directoryStats = directoryItems.reduce(getItemData, initialStats);
+    const directoryStats = directoryItems.reduce(getItemStats, initialStats);
 
     return directoryStats;
   };
@@ -86,9 +92,7 @@ function App() {
                 padding="7px" 
             >
                 <HStack spacing="3px">
-                    <Circle size="10px" bgColor="gray.500"></Circle>
-                    <Circle size="10px" bgColor="gray.500"></Circle>
-                    <Circle size="10px" bgColor="gray.500"></Circle>
+                    {windowActionItems}
                 </HStack>
             </Box>
             <Box bgColor="gray.50" padding="40px">
