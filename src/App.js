@@ -19,16 +19,44 @@ import {
 import axios from 'axios';
 
 const directoryURL = "https://dev21.becollective.com/api/v2/coding-challenges/dirs";
+const TYPE_FILE = 'file';
+const TYPE_FOLDER = 'folder';
 
 function App() {
   const [ directoryItems, setDirectoryItems ] = useState([]);
+  const [ directoryData, setDirectoryData ] = useState({
+      fileCount: 0,
+      totalSizeOfFiles: 0,
+  });
 
   useEffect(() => {
       axios.get(directoryURL)
-          .then((response) => {
-            console.log('>>> response: ', response);
-          });
+          .then((response) => setDirectoryItems(response.data));
   }, []);
+
+  useEffect(() => {
+      console.log(">>> directory items now = ", directoryItems);
+      // TODO: const fileStats = grabDirectoryData(directoryItems);
+      //setDirectoryData(fileStats);
+  }, [directoryItems]);
+
+  const directoryFileStats = {
+      fileCount: 0,
+      totalSizeOfFiles: 0,
+  };  
+  const grabDirectoryData = (directoryItems) => {
+    directoryItems.forEach((item) => {
+        if (item.type === TYPE_FILE) {
+            console.log('>>> item.type is FILE with name = ' + item.name);
+        }
+        if (item.type === TYPE_FOLDER) {
+            console.log('>>> item.type is FOLDER with name = ' + item.name);
+        }
+        // TODO: base zero and return whatever sum of the files is in that directory
+        // TODO: go over the children and add to the main count
+
+    });
+  };
     
   return (
     <div className="App">
@@ -140,7 +168,7 @@ function App() {
                         </Box>
                     </VStack>
                     <Box borderTop="1px" borderColor="gray.400" paddingTop="20px">
-                        <Text fontSize="xl">Total Files: 5</Text>
+                        <Text fontSize="xl">Total Files: { directoryData.fileCount }</Text>
                         <Text fontSize="xl">Total Filesize: 921MB</Text>
                     </Box>
                 </Container>
