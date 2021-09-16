@@ -36,22 +36,27 @@ function App() {
 
   useEffect(() => {
       console.log(">>> directory items now = ", directoryItems);
-      const fileStats = getDirectoryStats(directoryItems);
-      //setDirectoryData(fileStats);
+      const finalStats = getDirectoryStats(directoryItems);
+      console.log('>>> finalStats', finalStats);
+      //setDirectoryData(finalStats);
   }, [directoryItems]);
 
-  const getItemData = (directoryTotals, item) => {
+  const getItemData = (directoryStats, item) => {
+    console.log('>>> item', item);
     if (item.type === TYPE_FILE) {
-        console.log('>>> FILE [' + item.name + ']');
+      console.log('>>> FILE [' + item.name + ']');
+      directoryStats.fileCount += 1;
+      directoryStats.totalSizeOfFiles += item.size;
     }
     if (item.type === TYPE_FOLDER) {
       console.log('>>> FOLDER [' + item.name + ']');
-      getDirectoryStats(item.children);
+      const subDirectoryStats = getDirectoryStats(item.children);
+      directoryStats.fileCount += subDirectoryStats.fileCount;
+      directoryStats.totalSizeOfFiles += subDirectoryStats.totalSizeOfFiles;
       console.log('>>> closing FOLDER [' + item.name + ']');
     }
-    // TODO: base zero and return whatever sum of the files is in that directory
-    // TODO: go over the children and add to the main count
-    return directoryTotals;
+
+    return directoryStats;
   };
 
   const getDirectoryStats = (directoryItems) => {
@@ -60,10 +65,10 @@ function App() {
       totalSizeOfFiles: 0,
     };  
 
-    const directoryTotals = directoryItems.reduce(getItemData, initialStats);
-    console.log('>>> directoryTotals', directoryTotals);
+    const directoryStats = directoryItems.reduce(getItemData, initialStats);
+    console.log('>>> directoryStats', directoryStats);
 
-    return directoryTotals;
+    return directoryStats;
   };
     
   return (
