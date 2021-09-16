@@ -36,33 +36,34 @@ function App() {
 
   useEffect(() => {
       console.log(">>> directory items now = ", directoryItems);
-      const fileStats = getDirectoryData(directoryItems);
+      const fileStats = getDirectoryStats(directoryItems);
       //setDirectoryData(fileStats);
   }, [directoryItems]);
 
-  const getItemData = (item) => {
+  const getItemData = (directoryTotals, item) => {
     if (item.type === TYPE_FILE) {
         console.log('>>> FILE [' + item.name + ']');
     }
     if (item.type === TYPE_FOLDER) {
       console.log('>>> FOLDER [' + item.name + ']');
-      getDirectoryData(item.children);
+      getDirectoryStats(item.children);
       console.log('>>> closing FOLDER [' + item.name + ']');
     }
     // TODO: base zero and return whatever sum of the files is in that directory
     // TODO: go over the children and add to the main count
+    return directoryTotals;
   };
 
-  const getDirectoryData = (directoryItems) => {
-    const directoryStats = {
+  const getDirectoryStats = (directoryItems) => {
+    const initialStats = {
       fileCount: 0,
       totalSizeOfFiles: 0,
     };  
 
-    directoryItems.forEach(getItemData);
-    console.log('>>> directoryStats', directoryStats);
+    const directoryTotals = directoryItems.reduce(getItemData, initialStats);
+    console.log('>>> directoryTotals', directoryTotals);
 
-    return directoryStats;
+    return directoryTotals;
   };
     
   return (
