@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { 
     Box,
     HStack,
+    VStack,
     Icon,
     Text,
 } from "@chakra-ui/react";
@@ -23,6 +24,7 @@ const DirectoryItem = (props) => {
         type,
         name,
         size,
+        children,
     } = props.item;
     const [folderOpened, setFolderOpened] = useState(false);
 
@@ -38,8 +40,8 @@ const DirectoryItem = (props) => {
                 ? <Icon as={FaChevronDown} onClick={toggleFolder}/>
                 : <Icon as={FaChevronRight} onClick={toggleFolder}/>;
             itemIcon = folderOpened 
-                ? <Icon as={FaFolderOpen} boxSize="1.5em"/>
-                : <Icon as={FaFolder} boxSize="1.5em"/>;
+                ? <Icon as={FaFolderOpen} boxSize="1.5em" onClick={toggleFolder}/>
+                : <Icon as={FaFolder} boxSize="1.5em" onClick={toggleFolder}/>;
         }
 
         return (
@@ -54,20 +56,60 @@ const DirectoryItem = (props) => {
         );
     };
 
+    // TODO: move this to a helper method
+  const getDirectoryList = (directoryItems) => {
+        console.log('>>> getDirectoryList directoryItems', directoryItems);
+      return directoryItems.map((directoryItem) => {
+          const itemToRender = {
+              ...directoryItem,
+          };
+
+          return <DirectoryItem item={itemToRender} />;
+      });
+  };
+
+    const getDirectoryChildren = (children) => {
+        console.log('>>> getDirectoryChildren children', children);
+        return (
+            <Box>
+                <VStack align="left">
+                    <Box>
+                        <HStack>
+                            <Box width="2em" height="1em">
+                            </Box>
+                            <Box>
+                                <VStack align="left" spacing={6}>
+                                    {getDirectoryList(children)}
+                                </VStack>
+                            </Box>
+                        </HStack>
+                    </Box>
+                </VStack>
+            </Box>
+        );
+    };
+
     return (
-        <Box>
-            <HStack>
-                {getIcons(type, folderOpened)}
-                <Box height="1em" paddingLeft={2}>
-                    <Text>{name}</Text>
-                </Box>
-                <Box height="1em" paddingLeft={2}>
-                    {type === TYPE_FILE &&
-                        <Text>{ prettyBytes(size, {maximumFractionDigits: 0}) }</Text>
-                    }
-                </Box>
-            </HStack>
-        </Box>
+        <React.Fragment>
+            <Box>
+                <HStack>
+                    {getIcons(type, folderOpened)}
+                    <Box height="1em" paddingLeft={2}>
+                        <Text>{name}</Text>
+                    </Box>
+                    <Box height="1em" paddingLeft={2}>
+                        {type === TYPE_FILE &&
+                            <Text>{ prettyBytes(size, {maximumFractionDigits: 0}) }</Text>
+                        }
+                    </Box>
+                </HStack>
+            </Box>
+            {type === TYPE_FOLDER 
+                && children
+                && folderOpened
+                && getDirectoryChildren(children)
+            }
+        </React.Fragment>
     );
 };
 
