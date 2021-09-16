@@ -17,6 +17,7 @@ import {
     FaFolderOpen,
 } from "react-icons/fa";
 import axios from 'axios';
+import prettyBytes from 'pretty-bytes';
 
 const directoryURL = "https://dev21.becollective.com/api/v2/coding-challenges/dirs";
 const TYPE_FILE = 'file';
@@ -35,25 +36,20 @@ function App() {
   }, []);
 
   useEffect(() => {
-      console.log(">>> directory items now = ", directoryItems);
       const finalStats = getDirectoryStats(directoryItems);
       console.log('>>> finalStats', finalStats);
-      //setDirectoryData(finalStats);
+      setDirectoryData(finalStats);
   }, [directoryItems]);
 
   const getItemData = (directoryStats, item) => {
-    console.log('>>> item', item);
     if (item.type === TYPE_FILE) {
-      console.log('>>> FILE [' + item.name + ']');
       directoryStats.fileCount += 1;
       directoryStats.totalSizeOfFiles += item.size;
     }
     if (item.type === TYPE_FOLDER) {
-      console.log('>>> FOLDER [' + item.name + ']');
       const subDirectoryStats = getDirectoryStats(item.children);
       directoryStats.fileCount += subDirectoryStats.fileCount;
       directoryStats.totalSizeOfFiles += subDirectoryStats.totalSizeOfFiles;
-      console.log('>>> closing FOLDER [' + item.name + ']');
     }
 
     return directoryStats;
@@ -64,13 +60,11 @@ function App() {
       fileCount: 0,
       totalSizeOfFiles: 0,
     };  
-
     const directoryStats = directoryItems.reduce(getItemData, initialStats);
-    console.log('>>> directoryStats', directoryStats);
 
     return directoryStats;
   };
-    
+
   return (
     <div className="App">
       <Box 
@@ -182,7 +176,9 @@ function App() {
                     </VStack>
                     <Box borderTop="1px" borderColor="gray.400" paddingTop="20px">
                         <Text fontSize="xl">Total Files: { directoryData.fileCount }</Text>
-                        <Text fontSize="xl">Total Filesize: 921MB</Text>
+                        <Text fontSize="xl">
+                            Total Filesize: { prettyBytes(directoryData.totalSizeOfFiles, {maximumFractionDigits: 0}) }
+                            </Text>
                     </Box>
                 </Container>
             </Box>
