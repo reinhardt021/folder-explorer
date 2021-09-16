@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { 
     Box,
@@ -18,6 +18,7 @@ import {
 } from "react-icons/fa";
 import axios from 'axios';
 import prettyBytes from 'pretty-bytes';
+import DirectoryItem from './components/DirectoryItem';
 
 const directoryURL = "https://dev21.becollective.com/api/v2/coding-challenges/dirs";
 const TYPE_FILE = 'file';
@@ -98,6 +99,24 @@ function App() {
             <Box bgColor="gray.50" padding="40px">
                 <Container align="left">
                     <VStack paddingBottom="30px" align="left" spacing={6}>
+                        <DirectoryItem item={{
+                            type: "file",
+                            name: "Bikedfafsf.pdf",
+                            size: 91234,
+                            isOpen: false,
+                        }} />
+                        <DirectoryItem item={{
+                            type: "folder",
+                            name: "Bikes",
+                            size: 23654,
+                            isOpen: false,
+                        }} />
+                        <DirectoryItem item={{
+                            type: "folder",
+                            name: "Bikes",
+                            size: 23654,
+                            isOpen: true,
+                        }} />
                         <Box>
                             <HStack>
                                 <Box width="1em" height="1em">
@@ -181,7 +200,7 @@ function App() {
                         <Text fontSize="xl">Total Files: { directoryData.fileCount }</Text>
                         <Text fontSize="xl">
                             Total Filesize: { prettyBytes(directoryData.totalSizeOfFiles, {maximumFractionDigits: 0}) }
-                            </Text>
+                        </Text>
                     </Box>
                 </Container>
             </Box>
