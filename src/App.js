@@ -5,24 +5,13 @@ import {
     Circle,
     Container,
     HStack,
-    Icon,
     VStack,
     Text,
 } from "@chakra-ui/react";
-import { 
-    FaChevronDown,
-    FaChevronRight,
-    FaFileAlt,
-    FaFolder,
-    FaFolderOpen,
-} from "react-icons/fa";
 import axios from 'axios';
 import prettyBytes from 'pretty-bytes';
-import DirectoryItem from './components/DirectoryItem';
-
-const directoryURL = "https://dev21.becollective.com/api/v2/coding-challenges/dirs";
-const TYPE_FILE = 'file';
-const TYPE_FOLDER = 'folder';
+import { DIRECTORY_API, TYPE_FILE, TYPE_FOLDER } from './constants';
+import { getDirectoryList } from './helpers';
 
 const windowActions = ['close', 'minimize', 'maximize'];
 const windowActionItems = windowActions.map((windowAction, index) => {
@@ -37,12 +26,11 @@ function App() {
   });
 
   useEffect(() => {
-      axios.get(directoryURL)
+      axios.get(DIRECTORY_API)
           .then((response) => setDirectoryItems(response.data));
   }, []);
 
   useEffect(() => {
-      console.log('>>> directoryItems', directoryItems);
       const finalStats = getDirectoryStats(directoryItems);
       setDirectoryData(finalStats);
   }, [directoryItems]);
@@ -66,19 +54,8 @@ function App() {
       fileCount: 0,
       totalSizeOfFiles: 0,
     };  
-    const directoryStats = directoryItems.reduce(getItemStats, initialStats);
 
-    return directoryStats;
-  };
-
-  const getDirectoryList = (directoryItems) => {
-      return directoryItems.map((directoryItem) => {
-          const itemToRender = {
-              ...directoryItem,
-          };
-
-          return <DirectoryItem item={itemToRender} />;
-      });
+    return directoryItems.reduce(getItemStats, initialStats);
   };
 
   return (
@@ -111,43 +88,6 @@ function App() {
                     <Box paddingBottom="30px">
                         <VStack align="left" spacing={6}>
                             {getDirectoryList(directoryItems)}
-                            <DirectoryItem item={{
-                                type: "file",
-                                name: "Bikedfafsf.pdf",
-                                size: 91234,
-                            }} />
-                            <DirectoryItem item={{
-                                type: "folder",
-                                name: "Cars",
-                                size: 23654,
-                            }} />
-                            <Box>
-                                <VStack align="left">
-                                    <Box>
-                                        <HStack>
-                                            <Box width="2em" height="1em">
-                                            </Box>
-                                            <Box>
-                                                <VStack align="left" spacing={6}>
-                                                    <DirectoryItem item={{
-                                                        type: "file",
-                                                        name: "Toyota",
-                                                        size: 15654,
-                                                        isOpen: true,
-                                                    }} />
-                                                    <DirectoryItem item={{
-                                                        type: "folder",
-                                                        name: "Mitsubishi",
-                                                        size: 15654,
-                                                        isOpen: false,
-                                                    }} />
-                                                </VStack>
-                                            </Box>
-                                        </HStack>
-                                    </Box>
-                                </VStack>
-
-                            </Box>
                         </VStack>
                     </Box>
                     <Box borderTop="1px" borderColor="gray.400" paddingTop="20px">

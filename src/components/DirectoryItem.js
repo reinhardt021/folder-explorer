@@ -14,10 +14,8 @@ import {
     FaFolderOpen,
 } from "react-icons/fa";
 import prettyBytes from 'pretty-bytes';
-
-// TODO: move to a constants file
-const TYPE_FILE = 'file';
-const TYPE_FOLDER = 'folder';
+import { TYPE_FILE, TYPE_FOLDER } from '../constants';
+import { getDirectoryList } from '../helpers';
 
 const DirectoryItem = (props) => {
     const {
@@ -56,20 +54,7 @@ const DirectoryItem = (props) => {
         );
     };
 
-    // TODO: move this to a helper method
-  const getDirectoryList = (directoryItems) => {
-        console.log('>>> getDirectoryList directoryItems', directoryItems);
-      return directoryItems.map((directoryItem) => {
-          const itemToRender = {
-              ...directoryItem,
-          };
-
-          return <DirectoryItem item={itemToRender} />;
-      });
-  };
-
     const getDirectoryChildren = (children) => {
-        console.log('>>> getDirectoryChildren children', children);
         return (
             <Box>
                 <VStack align="left">
@@ -98,17 +83,15 @@ const DirectoryItem = (props) => {
                         <Text>{name}</Text>
                     </Box>
                     <Box height="1em" paddingLeft={2}>
-                        {type === TYPE_FILE &&
-                            <Text>{ prettyBytes(size, {maximumFractionDigits: 0}) }</Text>
-                        }
+                        {type === TYPE_FILE
+                            && <Text>{ prettyBytes(size, {maximumFractionDigits: 0}) }</Text>}
                     </Box>
                 </HStack>
             </Box>
             {type === TYPE_FOLDER 
                 && children
                 && folderOpened
-                && getDirectoryChildren(children)
-            }
+                && getDirectoryChildren(children)}
         </React.Fragment>
     );
 };
