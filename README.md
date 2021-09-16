@@ -1,3 +1,9 @@
+# FolderExplorer
+
+Exploring an API with a Directory Tree
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
