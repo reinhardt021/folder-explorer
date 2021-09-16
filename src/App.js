@@ -3,8 +3,6 @@ import {
     Box,
     Circle,
     Container,
-    Grid,
-    GridItem,
     HStack,
     Icon,
     VStack,
@@ -106,7 +104,7 @@ function App() {
                                                         <Text>Toyota</Text>
                                                     </Box>
                                                     <Box height="1em" paddingLeft={2}>
-                                                        <Text>16kb</Text>
+                                                        <Text>16KB</Text>
                                                     </Box>
                                                 </HStack>
                                                 <HStack>
