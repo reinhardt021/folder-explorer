@@ -18,6 +18,13 @@ function App() {
           Learn React
         </a>
       </header>
+      <div>
+        <h2>Window</h2>
+        <div>
+            <p>Total Files: 5</p>
+            <p>Total Filesize: 921MB</p>
+        </div>
+      </div>
     </div>
   );
 }
