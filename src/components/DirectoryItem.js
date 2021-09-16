@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
     Box,
     HStack,
@@ -23,17 +23,21 @@ const DirectoryItem = (props) => {
         type,
         name,
         size,
-        isOpen = false,
     } = props.item;
+    const [folderOpened, setFolderOpened] = useState(false);
 
-    const getIcons = (type, isOpen) => {
+    const toggleFolder = () => {
+        setFolderOpened(!folderOpened);
+    };
+
+    const getIcons = (type, folderOpened) => {
         let chevronIcon = null;
         let itemIcon = <Icon as={FaFileAlt} boxSize="1.5em"/>;
         if (type === TYPE_FOLDER) {
-            chevronIcon = isOpen 
-                ? <Icon as={FaChevronDown}/>
-                : <Icon as={FaChevronRight}/>;
-            itemIcon = isOpen 
+            chevronIcon = folderOpened 
+                ? <Icon as={FaChevronDown} onClick={toggleFolder}/>
+                : <Icon as={FaChevronRight} onClick={toggleFolder}/>;
+            itemIcon = folderOpened 
                 ? <Icon as={FaFolderOpen} boxSize="1.5em"/>
                 : <Icon as={FaFolder} boxSize="1.5em"/>;
         }
@@ -53,7 +57,7 @@ const DirectoryItem = (props) => {
     return (
         <Box>
             <HStack>
-                {getIcons(type, isOpen)}
+                {getIcons(type, folderOpened)}
                 <Box height="1em" paddingLeft={2}>
                     <Text>{name}</Text>
                 </Box>

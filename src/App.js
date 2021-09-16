@@ -72,19 +72,9 @@ function App() {
   };
 
   const getDirectoryList = (directoryItems) => {
-      console.log('>>> getDirectoryList directoryItems', directoryItems);
-
-      <DirectoryItem item={{
-                            type: "file",
-                            name: "Bikedfafsf.pdf",
-                            size: 91234,
-                            isOpen: false,
-                        }} />
-
       return directoryItems.map((directoryItem) => {
           const itemToRender = {
               ...directoryItem,
-              isOpen: false,
           };
 
           return <DirectoryItem item={itemToRender} />;
@@ -125,25 +115,11 @@ function App() {
                                 type: "file",
                                 name: "Bikedfafsf.pdf",
                                 size: 91234,
-                                isOpen: false,
-                            }} />
-                            <DirectoryItem item={{
-                                type: "folder",
-                                name: "Bikes",
-                                size: 23654,
-                                isOpen: false,
-                            }} />
-                            <DirectoryItem item={{
-                                type: "folder",
-                                name: "Planes",
-                                size: 23654,
-                                isOpen: false,
                             }} />
                             <DirectoryItem item={{
                                 type: "folder",
                                 name: "Cars",
                                 size: 23654,
-                                isOpen: true,
                             }} />
                             <Box>
                                 <VStack align="left">
