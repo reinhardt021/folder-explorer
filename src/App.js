@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 import { 
     Box,
@@ -15,8 +16,20 @@ import {
     FaFolder,
     FaFolderOpen,
 } from "react-icons/fa";
+import axios from 'axios';
+
+const directoryURL = "https://dev21.becollective.com/api/v2/coding-challenges/dirs";
 
 function App() {
+  const [ directoryItems, setDirectoryItems ] = useState([]);
+
+  useEffect(() => {
+      axios.get(directoryURL)
+          .then((response) => {
+            console.log('>>> response: ', response);
+          });
+  }, []);
+    
   return (
     <div className="App">
       <Box 
