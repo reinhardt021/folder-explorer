@@ -113,49 +113,16 @@ function App() {
                         }} />
                         <DirectoryItem item={{
                             type: "folder",
-                            name: "Bikes",
+                            name: "Planes",
+                            size: 23654,
+                            isOpen: false,
+                        }} />
+                        <DirectoryItem item={{
+                            type: "folder",
+                            name: "Cars",
                             size: 23654,
                             isOpen: true,
                         }} />
-                        <Box>
-                            <HStack>
-                                <Box width="1em" height="1em">
-                                    <Icon as={FaChevronRight}/>
-                                </Box>
-                                <Box width="1em" height="1em">
-                                    <Icon as={FaFolder} boxSize="1.5em"/>
-                                </Box>
-                                <Box height="1em" paddingLeft={2}>
-                                    <Text>Bikes</Text>
-                                </Box>
-                            </HStack>
-                        </Box>
-                        <Box>
-                            <HStack>
-                                <Box width="1em" height="1em">
-                                    <Icon as={FaChevronRight}/>
-                                </Box>
-                                <Box width="1em" height="1em">
-                                    <Icon as={FaFolder} boxSize="1.5em"/>
-                                </Box>
-                                <Box height="1em" paddingLeft={2}>
-                                    <Text>Planes</Text>
-                                </Box>
-                            </HStack>
-                        </Box>
-                        <Box>
-                            <HStack>
-                                <Box width="1em" height="1em">
-                                    <Icon as={FaChevronDown}/>
-                                </Box>
-                                <Box width="1em" height="1em">
-                                    <Icon as={FaFolderOpen} boxSize="1.5em"/>
-                                </Box>
-                                <Box height="1em" paddingLeft={2}>
-                                    <Text>Cars</Text>
-                                </Box>
-                            </HStack>
-                        </Box>
                         <Box>
                             <VStack align="left">
                                 <Box>
@@ -164,30 +131,18 @@ function App() {
                                         </Box>
                                         <Box>
                                             <VStack align="left" spacing={6}>
-                                                <HStack>
-                                                    <Box width="1em" height="1em">
-                                                    </Box>
-                                                    <Box width="1em" height="1em">
-                                                        <Icon as={FaFileAlt} boxSize="1.5em"/>
-                                                    </Box>
-                                                    <Box height="1em" paddingLeft={2}>
-                                                        <Text>Toyota</Text>
-                                                    </Box>
-                                                    <Box height="1em" paddingLeft={2}>
-                                                        <Text>16KB</Text>
-                                                    </Box>
-                                                </HStack>
-                                                <HStack>
-                                                    <Box width="1em" height="1em">
-                                                        <Icon as={FaChevronRight}/>
-                                                    </Box>
-                                                    <Box width="1em" height="1em">
-                                                        <Icon as={FaFolder} boxSize="1.5em"/>
-                                                    </Box>
-                                                    <Box height="1em" paddingLeft={2}>
-                                                        <Text>Mitsubishi</Text>
-                                                    </Box>
-                                                </HStack>
+                                                <DirectoryItem item={{
+                                                    type: "file",
+                                                    name: "Toyota",
+                                                    size: 15654,
+                                                    isOpen: true,
+                                                }} />
+                                                <DirectoryItem item={{
+                                                    type: "folder",
+                                                    name: "Mitsubishi",
+                                                    size: 15654,
+                                                    isOpen: false,
+                                                }} />
                                             </VStack>
                                         </Box>
                                     </HStack>
