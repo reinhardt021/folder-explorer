@@ -3,12 +3,17 @@ import {
     Box,
     Circle,
     Container,
+    Grid,
+    GridItem,
     HStack,
-    Text
+    Icon,
+    VStack,
+    Text,
 } from "@chakra-ui/react";
 import { 
     FaChevronDown,
     FaChevronRight,
+    FaFileAlt,
     FaFolder,
     FaFolderOpen,
 } from "react-icons/fa";
@@ -43,29 +48,86 @@ function App() {
             </Box>
             <Box bgColor="gray.50" padding="40px">
                 <Container align="left">
-                    <Box paddingBottom="30px">
+                    <VStack paddingBottom="30px" align="left" spacing={6}>
                         <Box>
                             <HStack>
-                                <FaChevronRight/>
-                                <FaFolder/>
-                                <Text>Bikes</Text>
+                                <Box width="1em" height="1em">
+                                    <Icon as={FaChevronRight}/>
+                                </Box>
+                                <Box width="1em" height="1em">
+                                    <Icon as={FaFolder} boxSize="1.5em"/>
+                                </Box>
+                                <Box height="1em" paddingLeft={2}>
+                                    <Text>Bikes</Text>
+                                </Box>
                             </HStack>
                         </Box>
                         <Box>
                             <HStack>
-                                <FaChevronRight/>
-                                <FaFolder/>
-                                <Text>Planes</Text>
+                                <Box width="1em" height="1em">
+                                    <Icon as={FaChevronRight}/>
+                                </Box>
+                                <Box width="1em" height="1em">
+                                    <Icon as={FaFolder} boxSize="1.5em"/>
+                                </Box>
+                                <Box height="1em" paddingLeft={2}>
+                                    <Text>Planes</Text>
+                                </Box>
                             </HStack>
                         </Box>
                         <Box>
                             <HStack>
-                                <FaChevronDown/>
-                                <FaFolderOpen/>
-                                <Text>Cars</Text>
+                                <Box width="1em" height="1em">
+                                    <Icon as={FaChevronDown}/>
+                                </Box>
+                                <Box width="1em" height="1em">
+                                    <Icon as={FaFolderOpen} boxSize="1.5em"/>
+                                </Box>
+                                <Box height="1em" paddingLeft={2}>
+                                    <Text>Cars</Text>
+                                </Box>
                             </HStack>
                         </Box>
-                    </Box>
+                        <Box>
+                            <VStack align="left">
+                                <Box>
+                                    <HStack>
+                                        <Box width="2em" height="1em">
+                                        </Box>
+                                        <Box>
+                                            <VStack align="left" spacing={6}>
+                                                <HStack>
+                                                    <Box width="1em" height="1em">
+                                                    </Box>
+                                                    <Box width="1em" height="1em">
+                                                        <Icon as={FaFileAlt} boxSize="1.5em"/>
+                                                    </Box>
+                                                    <Box height="1em" paddingLeft={2}>
+                                                        <Text>Toyota</Text>
+                                                    </Box>
+                                                    <Box height="1em" paddingLeft={2}>
+                                                        <Text>16kb</Text>
+                                                    </Box>
+                                                </HStack>
+                                                <HStack>
+                                                    <Box width="1em" height="1em">
+                                                        <Icon as={FaChevronRight}/>
+                                                    </Box>
+                                                    <Box width="1em" height="1em">
+                                                        <Icon as={FaFolder} boxSize="1.5em"/>
+                                                    </Box>
+                                                    <Box height="1em" paddingLeft={2}>
+                                                        <Text>Mitsubishi</Text>
+                                                    </Box>
+                                                </HStack>
+                                            </VStack>
+                                        </Box>
+                                    </HStack>
+                                </Box>
+                            </VStack>
+
+                        </Box>
+                    </VStack>
                     <Box borderTop="1px" borderColor="gray.400" paddingTop="20px">
                         <Text fontSize="xl">Total Files: 5</Text>
                         <Text fontSize="xl">Total Filesize: 921MB</Text>
