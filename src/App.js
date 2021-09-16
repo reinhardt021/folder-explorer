@@ -37,7 +37,6 @@ function App() {
 
   useEffect(() => {
       const finalStats = getDirectoryStats(directoryItems);
-      console.log('>>> finalStats', finalStats);
       setDirectoryData(finalStats);
   }, [directoryItems]);
 
